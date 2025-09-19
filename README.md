@@ -1,1 +1,0 @@
-# mmo_truco_gaucho_front
