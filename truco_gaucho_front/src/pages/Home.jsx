@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <div className="flex flex-col items-center justify-center h-screen gap-6 bg-gray-50">
-      <h1 className="text-4xl font-bold text-green-800">Truco Gaúcho MMO</h1>
+      <h1 className="text-4xl font-bold text-green-800">Truco MMO</h1>
       <p className="text-lg text-gray-600">Desafie jogadores do Brasil inteiro!</p>
       <div className="flex gap-4">
         <Link
