@@ -353,54 +353,61 @@ function Partida() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen gap-4 bg-green-50 p-4">
-      <h2 className="text-2xl font-bold text-green-800">Truco — Mesa</h2>
-      <div className="flex gap-3">
-        <button onClick={distribuir} className="px-3 py-2 rounded bg-purple-600 text-white">Distribuir Cartas</button>
-        <button onClick={resetGame} className="px-3 py-2 rounded bg-red-600 text-white">Reset</button>
+     <div className="flex flex-col items-center justify-center min-h-screen gap-6 bg-gradient-to-br from-green-50 to-green-100 p-6">
+      <h2 className="text-3xl font-bold text-green-800 tracking-wide">Truco — Mesa</h2>
+      <div className="flex gap-4">
+        <button onClick={distribuir} className="px-4 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-purple-700 text-white font-semibold hover:from-purple-700 hover:to-purple-800 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+          Distribuir Cartas
+        </button>
+        <button onClick={resetGame} className="px-4 py-2 rounded-lg bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold hover:from-red-700 hover:to-red-800 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+          Reset
+        </button>
       </div>
-      <div className="relative w-full max-w-5xl h-[520px] border rounded-lg bg-white shadow p-4">
-        <div className="absolute left-1/2 transform -translate-x-1/2 top-2">
+      <div className="relative w-full max-w-6xl h-[600px] border-2 rounded-xl bg-white shadow-xl p-6 backdrop-blur-sm bg-opacity-90">
+        <div className="absolute left-1/2 transform -translate-x-1/2 top-4">
           <PlayerCard player={players[0]} index={0} />
         </div>
-        <div className="absolute top-1/2 right-2 transform -translate-y-1/2">
+        <div className="absolute top-1/2 right-4 transform -translate-y-1/2">
           <PlayerCard player={players[1]} index={1} />
         </div>
-        <div className="absolute left-1/2 transform -translate-x-1/2 bottom-2">
+        <div className="absolute left-1/2 transform -translate-x-1/2 bottom-4">
           <PlayerCard player={players[2]} index={2} />
         </div>
-        <div className="absolute top-1/2 left-2 transform -translate-y-1/2">
+        <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
           <PlayerCard player={players[3]} index={3} />
         </div>
-        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-48 rounded-xl bg-green-700 text-white flex flex-col items-center justify-center shadow-lg">
-          <div className="font-bold">MESA</div>
+        <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-56 rounded-xl bg-gradient-to-br from-green-700 to-green-800 text-white flex flex-col items-center justify-center shadow-2xl border border-green-600">
+          <div className="font-bold text-2xl mb-2">MESA</div>
           <div className="text-sm mt-1">Vira: {vira ? (vira.valor + vira.naipe) : "—"}</div>
-          <div className="mt-2 text-lg">
-            <div className="flex items-center gap-2">
-              <div className="w-16 text-center">{mesaDisplay[0]}</div>
-              <div className="w-16 text-center">{mesaDisplay[1]}</div>
-              <div className="w-16 text-center">{mesaDisplay[2]}</div>
-              <div className="w-16 text-center">{mesaDisplay[3]}</div>
+          <div className="mt-4 text-lg">
+            <div className="flex items-center gap-4">
+              {mesaDisplay.map((carta, i) => (
+                <div key={i} className="w-16 h-24 bg-white rounded-lg shadow-md flex items-center justify-center text-green-800 font-bold text-xl">
+                  {carta}
+                </div>
+              ))}
             </div>
           </div>
-          <div className="text-xs mt-2">Truco: {trucoLevel} • Dealer: {dealer}</div>
+          <div className="text-xs mt-4">Truco: {trucoLevel} • Dealer: {dealer}</div>
           <div className="mt-2 text-sm">
             Rodadas: {rodadasGanhas.map((r,i) => `${i}:${r}`).join(" | ")}
           </div>
         </div>
       </div>
-      <div className="w-full max-w-5xl flex gap-4">
-        <div className="w-2/3 bg-white p-3 rounded shadow">
-          <div className="font-semibold mb-2">Mensagens</div>
-          <div className="h-40 overflow-auto flex flex-col-reverse gap-2">
-            {mensagens.map((m, i) => <div key={i} className="text-sm text-gray-700">• {m}</div>)}
+      <div className="w-full max-w-6xl flex gap-6">
+        <div className="w-2/3 bg-white p-4 rounded-xl shadow-lg border">
+          <div className="font-semibold text-lg text-green-800 mb-3">Mensagens</div>
+          <div className="h-48 overflow-auto flex flex-col-reverse gap-2 px-2">
+            {mensagens.map((m, i) => (
+              <div key={i} className="text-sm text-gray-700 py-1 px-2 rounded hover:bg-gray-50">• {m}</div>
+            ))}
           </div>
         </div>
-        <div className="w-1/3 bg-white p-3 rounded shadow">
-          <div className="font-semibold mb-2">Placar</div>
-          <div className="text-sm mb-2">Equipe 0 (jog 0+2): {players[0].pontos + players[2].pontos}</div>
-          <div className="text-sm mb-2">Equipe 1 (jog 1+3): {players[1].pontos + players[3].pontos}</div>
-          <div className="mt-3">
+        <div className="w-1/3 bg-white p-4 rounded-xl shadow-lg border">
+          <div className="font-semibold text-lg text-green-800 mb-3">Placar</div>
+          <div className="text-sm mb-2 bg-gray-50 p-2 rounded">Equipe 0 (jog 0+2): {players[0].pontos + players[2].pontos}</div>
+          <div className="text-sm mb-2 bg-gray-50 p-2 rounded">Equipe 1 (jog 1+3): {players[1].pontos + players[3].pontos}</div>
+          <div className="mt-4 border-t pt-3">
             <div className="text-xs text-gray-600">Dealer: {dealer}</div>
             <div className="text-xs text-gray-600">Truco level: {trucoLevel}</div>
             <div className="text-xs text-gray-600">Mão finalizada: {handOver ? "Sim" : "Não"}</div>
